@@ -71,11 +71,14 @@ const App = () => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, MegansDoll, signer);
   
-        console.log("Going to pop wallet now to pay gas...")
-        const amount1 = ethers.utils.parseEther(".01")
-        const gas_limit = 100000
-        let nftTxn = await connectedContract.publicSaleMint(1, {value: amount1, gasLimit: ethers.utils.hexlify(gas_limit)});
-  
+        console.log("Going to pop wallet now to pay gas...");
+        const amount1 = ethers.utils.parseEther("0.001");
+        const gas_limit = 100000;
+        let nftTxn = await connectedContract.publicSaleMint(1, {
+          value: amount1,
+          gasLimit: ethers.utils.hexlify(gas_limit),
+        });
+        
         console.log("Mining...please wait.")
         await nftTxn.wait();
         
